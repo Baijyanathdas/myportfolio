@@ -122,12 +122,12 @@
 <body>
   <div class="sidebar">
     <div class="logo"></div>
-    <div class="profile"></div>
+    <a href="/">
+    <div class="profile"></div> </a>
     <ul class="menu"> 
+
       <li class="active"><a href="#"><i class="fas fa-home"></i><span>Dashboard</span></a></li>
-    
-
-
+      
       <li>
           <a href="{{ route('contacts.messages') }}" target="_blank">
     <i class="fas fa-code"></i>
