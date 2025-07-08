@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo pdo_sqlite mbstring tokenizer xml zip gd
+RUN docker-php-ext-install pdo pdo_sqlite mbstring xml zip gd
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
