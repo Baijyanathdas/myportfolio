@@ -1,6 +1,6 @@
 FROM php:8.2-cli
 
-# Install dependencies
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
@@ -12,10 +12,9 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     libpng-dev \
     libjpeg-dev \
-    libfreetype6-dev
-
-# Install PHP extensions
-RUN docker-php-ext-install pdo pdo_sqlite mbstring xml zip gd
+    libfreetype6-dev \
+    libpq-dev \
+    && docker-php-ext-install pdo pdo_pgsql mbstring tokenizer xml zip gd
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -26,7 +25,7 @@ WORKDIR /app
 # Copy files
 COPY . /app
 
-# Set permissions
+# Permissions (for storage and cache)
 RUN chown -R www-data:www-data /app/storage /app/bootstrap/cache && \
     chmod -R 775 /app/storage /app/bootstrap/cache
 
