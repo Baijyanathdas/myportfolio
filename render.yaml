@@ -1,7 +1,6 @@
 services:
   - type: web
     name: laravel-portfolio
-    runtime: docker
     buildCommand: |
       composer install
       php artisan migrate --force || true
