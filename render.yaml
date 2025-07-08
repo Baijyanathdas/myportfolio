@@ -1,10 +1,7 @@
 services:
   - type: web
     name: laravel-portfolio
-    buildCommand: |
-      composer install
-      php artisan migrate --force || true
-    startCommand: php artisan serve --host 0.0.0.0 --port 10000
+    runtime: docker
     plan: free
     envVars:
       - key: APP_ENV
