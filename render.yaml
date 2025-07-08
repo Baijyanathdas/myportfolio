@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: laravel-portfolio
+    env: php
+    buildCommand: |
+      composer install
+      php artisan migrate --force || true
+    startCommand: php artisan serve --host 0.0.0.0 --port 10000
+    plan: free
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: DB_CONNECTION
+        value: sqlite
+      - key: APP_KEY
+        sync: false
