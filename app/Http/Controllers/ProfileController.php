@@ -62,5 +62,16 @@ public function updateAboutMe(Request $request)
 
     return redirect()->back()->with('success', 'About Me updated successfully!');
 }
+// Controller method to update
+public function updateHomepageContent(Request $request)
+{
+    foreach ($request->all() as $key => $value) {
+        \DB::table('homepage_contents')->updateOrInsert(
+            ['key' => $key],
+            ['value' => $value]
+        );
+    }
+    return redirect()->back()->with('success', 'Homepage updated!');
+}
 
 }
