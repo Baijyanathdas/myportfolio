@@ -1,8 +1,7 @@
 FROM php:8.2-cli
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y ...
-
+RUN apt-get update && apt-get install -y \
     git \
     unzip \
     curl \
@@ -16,23 +15,3 @@ RUN apt-get update && apt-get install -y ...
     libfreetype6-dev \
     libpq-dev \
     && docker-php-ext-install pdo pdo_pgsql mbstring tokenizer xml zip gd
-
-# Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-# Set working directory
-WORKDIR /app
-
-# Copy files
-COPY . /app
-
-# Permissions (for storage and cache)
-RUN chown -R www-data:www-data /app/storage /app/bootstrap/cache && \
-    chmod -R 775 /app/storage /app/bootstrap/cache
-
-# Install PHP dependencies
-RUN composer install --no-interaction --prefer-dist --optimize-autoloader
-
-# Expose port and run
-EXPOSE 8000
-CMD php artisan serve --host=0.0.0.0 --port=8000
